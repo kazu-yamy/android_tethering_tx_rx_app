@@ -35,7 +35,32 @@ class _ShowIPState extends State<MyHomePage> {
         title: const Text("IPアドレスの状態"),
       ),
 
+      body: Center(
 
+        child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: <Widget>[
+            Text(
+              "externalIP: $externalIPAddress",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+
+            Text(
+              "internalIP: $internalIPAddress",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+
+            Text(
+              "networkType: $networkType",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          ],
+
+        )
+
+      ),
     );
   }
 
