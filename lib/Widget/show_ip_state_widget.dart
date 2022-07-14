@@ -15,7 +15,7 @@ class ShowIPState extends State<MyHomePage> {
     await wifiState();
   }
 
-  Future<void> wifiState() async {
+  wifiState() async {
     externalIPAddress = await ipState.getExternalIP();
     internalIPAddress = await ipState.getInternalIP();
     networkType = await ipState.getNetworkType();
@@ -47,7 +47,7 @@ class ShowIPState extends State<MyHomePage> {
 
             children: <Widget>[
               Text(
-                "externalIP: $externalIPAddress",
+                "externalIP: $externalIPAddress.",
                 style: Theme.of(context).textTheme.headline5,
               ),
 

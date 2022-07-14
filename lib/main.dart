@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
 import 'package:android_tethering_tx_rx_app/Widget/show_ip_state_widget.dart';
 
@@ -46,17 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
       appBar: AppBar(
         title: Text(widget.title),
-      ),
-      drawer: PopupMenuButton(
-        onSelected: popupMenuSelected,
-        itemBuilder: (BuildContext context) =>
-        <PopupMenuEntry<Menu>> [
-          const PopupMenuItem(value: Menu.searchDevice, child: ListTile(leading: Icon(Icons.supervisor_account),
-          title: Text("aaa"))),
-          const PopupMenuItem(value: Menu.thisDeviceIP,child: ListTile(leading: Icon(Icons.crop_original),
-          title: Text("bbb"))),
-          const PopupMenuItem(value: Menu.other,child: ListTile(leading: Icon(Icons.wallet),
-              title: Text("ccc"))),
+        actions: <Widget>[
+          PopupMenuButton(
+            onSelected: popupMenuSelected,
+            itemBuilder: (context) => [
+              const PopupMenuItem(value: Menu.searchDevice, child: Text("aaa")),
+              const PopupMenuItem(value: Menu.thisDeviceIP, child: Text("bbb")),
+              const PopupMenuItem(value: Menu.other, child: Text("ccc"))
+            ]
+          ),
         ],
       ),
     );
@@ -80,7 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _pushPage(BuildContext context, dynamic page) {
     Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => page)
+      MaterialPageRoute(
+          builder: (context) {
+            return page;
+          }
+      ),
     );
   }
 }

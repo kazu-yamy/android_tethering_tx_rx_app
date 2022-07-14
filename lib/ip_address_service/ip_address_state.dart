@@ -2,12 +2,12 @@ import 'package:r_get_ip/r_get_ip.dart';
 
 class IPAddressState {
 
-  getExternalIP<String>() async {
+  getExternalIP<String>() {
 
     dynamic externalIPAddress;
 
     try {
-      externalIPAddress = await RGetIp.externalIP;
+      externalIPAddress = RGetIp.externalIP;
     } catch (e) {
       externalIPAddress = "Unknown...";
     }
@@ -16,12 +16,12 @@ class IPAddressState {
 
   }
 
-  getInternalIP<String>() async {
+  getInternalIP<String>() {
 
     dynamic internalIPAddress;
 
     try {
-      internalIPAddress = await RGetIp.internalIP;
+      internalIPAddress = RGetIp.internalIP;
     } catch (e) {
       internalIPAddress = "Unknown...";
     }
@@ -30,12 +30,12 @@ class IPAddressState {
 
   }
 
-  getNetworkType<String>() async {
+  getNetworkType<String>() {
 
     dynamic networkType;
 
     try {
-      networkType = await RGetIp.networkType;
+      networkType = RGetIp.networkType;
     } catch (e) {
       networkType = "Unknown...";
     }
