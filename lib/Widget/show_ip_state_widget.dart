@@ -1,29 +1,26 @@
 import 'package:android_tethering_tx_rx_app/ip_address_service/ip_address_state.dart';
-import 'package:android_tethering_tx_rx_app/main.dart';
 import 'package:flutter/material.dart';
 
-@override
-class _ShowIPState extends State<MyHomePage> {
-  IPAddressState IPState = IPAddressState();
-  dynamic externalIPAddress = "Unknown...";
-  dynamic internalIPAddress = "Unknown...";
-  dynamic networkType = "Unknown...";
+class ShowIPState extends StatefulWidget {
+  const ShowIPState({Key? key}) : super(key: key);
+
+  @override
+  State<ShowIPState> createState() =>  _ShowIPState();
+
+}
+
+dynamic externalIPAddress = "Searching...";
+dynamic  internalIPAddress = "Searching...";
+dynamic networkType = "Searching...";
+
+class _ShowIPState extends State<ShowIPState> {
 
   @override
   void initState() {
     super.initState();
-    wifiState();
-  }
-
-  Future<void> wifiState() async {
-    externalIPAddress = await IPState.getExternalIP();
-    internalIPAddress = await IPState.getInternalIP();
-    networkType = await IPState.getNetworkType();
-    setState(() {
-      externalIPAddress;
-      internalIPAddress;
-      networkType;
-    });
+    externalIPAddress = getExternalIP();
+    internalIPAddress = getInternalIP();
+    networkType = getNetworkType();
   }
 
   @override
@@ -37,31 +34,29 @@ class _ShowIPState extends State<MyHomePage> {
 
       body: Center(
 
-        child: Column(
+          child: Column(
 
-          mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
 
-          children: <Widget>[
-            Text(
-              "externalIP: $externalIPAddress",
-              style: Theme.of(context).textTheme.headline5,
-            ),
+            children: <Widget>[
+              Text(
+                "externalIP: $externalIPAddress.",
+                style: Theme.of(context).textTheme.headline5,
+              ),
 
-            Text(
-              "internalIP: $internalIPAddress",
-              style: Theme.of(context).textTheme.headline5,
-            ),
+              Text(
+                "internalIP: $internalIPAddress",
+                style: Theme.of(context).textTheme.headline5,
+              ),
 
-            Text(
-              "networkType: $networkType",
-              style: Theme.of(context).textTheme.headline5,
-            ),
-          ],
+              Text(
+                "networkType: $networkType",
+                style: Theme.of(context).textTheme.headline5,
+              ),
 
-        )
-
+            ],
+          )
       ),
     );
   }
-
 }

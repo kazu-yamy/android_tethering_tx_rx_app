@@ -1,4 +1,7 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
+import 'package:android_tethering_tx_rx_app/Widget/show_ip_state_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +35,8 @@ class MyHomePage extends StatefulWidget {
 
 }
 
+enum Menu {searchDevice, thisDeviceIP, other}
+
 class _MyHomePageState extends State<MyHomePage> {
 
   @override
@@ -41,23 +46,45 @@ class _MyHomePageState extends State<MyHomePage> {
 
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          PopupMenuButton(
+            onSelected: popupMenuSelected,
+            itemBuilder: (context) => [
+              const PopupMenuItem(value: Menu.searchDevice, child: Text("aaa")),
+              const PopupMenuItem(value: Menu.thisDeviceIP, child: Text("bbb")),
+              const PopupMenuItem(value: Menu.other, child: Text("ccc"))
+            ]
+          ),
+        ],
       ),
+    );
+  }
+  void popupMenuSelected(Menu selectedMenu) {
+    switch(selectedMenu) {
 
-      body: Center(
+      case Menu.searchDevice:
+        _pushPage(context, const ShowIPState());
+        break;
 
-        child: Column(
+      case Menu.thisDeviceIP:
+        // TODO: Handle this case.
+        break;
 
-          mainAxisAlignment: MainAxisAlignment.center,
+      case Menu.other:
+        // TODO: Handle this case.
+        break;
+    }
+  }
 
-          children: <Widget>[
-            Text(
-              'aaaaa',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-
-        ),
+  void _pushPage(BuildContext context, dynamic page) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) {
+            return page;
+          }
       ),
     );
   }
 }
+
+

@@ -1,47 +1,43 @@
 import 'package:r_get_ip/r_get_ip.dart';
 
-class IPAddressState {
+Future<String> getExternalIP() async {
 
-  getExternalIP<String>() async {
+  dynamic externalIPAddress;
 
-    dynamic externalIPAddress;
-
-    try {
-      externalIPAddress = await RGetIp.externalIP;
-    } catch (e) {
-      externalIPAddress = "Unknown...";
-    }
-
-    return(externalIPAddress.toString());
-
+  try {
+    externalIPAddress = await RGetIp.externalIP;
+  } catch (e) {
+    externalIPAddress = "Unknown...";
   }
 
-  getInternalIP<String>() async {
+  return Future<String>.value(externalIPAddress);
 
-    dynamic internalIPAddress;
+}
 
-    try {
-      internalIPAddress = await RGetIp.internalIP;
-    } catch (e) {
-      internalIPAddress = "Unknown...";
-    }
+Future<String> getInternalIP() async {
 
-    return(internalIPAddress.toString());
+  dynamic internalIPAddress;
 
+  try {
+    internalIPAddress = await RGetIp.internalIP;
+  } catch (e) {
+    internalIPAddress = "Unknown...";
   }
 
-  getNetworkType<String>() async {
+  return Future<String>.value(internalIPAddress);
 
-    dynamic networkType;
+}
 
-    try {
-      networkType = await RGetIp.networkType;
-    } catch (e) {
-      networkType = "Unknown...";
-    }
+Future<String> getNetworkType() async {
 
-    return(networkType.toString());
+  dynamic networkType;
 
+  try {
+    networkType = await RGetIp.networkType;
+  } catch (e) {
+    networkType = "Unknown...";
   }
+
+  return Future<String>.value(networkType);
 
 }
