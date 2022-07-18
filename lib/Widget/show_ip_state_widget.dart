@@ -1,37 +1,30 @@
 import 'package:android_tethering_tx_rx_app/ip_address_service/ip_address_state.dart';
-import 'package:android_tethering_tx_rx_app/main.dart';
 import 'package:flutter/material.dart';
 
-class ShowIPState extends State<MyHomePage> {
-
-  IPAddressState ipState = IPAddressState();
-  dynamic externalIPAddress = "Searching...";
-  dynamic internalIPAddress = "Searching...";
-  dynamic networkType = "Searching...";
+class ShowIPState extends StatefulWidget {
+  const ShowIPState({Key? key}) : super(key: key);
 
   @override
-  void initState() async {
-    super.initState();
-    await wifiState();
-  }
+  State<ShowIPState> createState() =>  _ShowIPState();
 
-  wifiState() async {
-    externalIPAddress = await ipState.getExternalIP();
-    internalIPAddress = await ipState.getInternalIP();
-    networkType = await ipState.getNetworkType();
-    if(mounted) {
-      setState(() {
-        externalIPAddress;
-        internalIPAddress;
-        networkType;
-      });
-    }
+}
+
+dynamic externalIPAddress = "Searching...";
+dynamic  internalIPAddress = "Searching...";
+dynamic networkType = "Searching...";
+
+class _ShowIPState extends State<ShowIPState> {
+
+  @override
+  void initState() {
+    super.initState();
+    externalIPAddress = getExternalIP();
+    internalIPAddress = getInternalIP();
+    networkType = getNetworkType();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    initState();
 
     return Scaffold(
 

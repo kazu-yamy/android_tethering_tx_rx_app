@@ -39,8 +39,6 @@ enum Menu {searchDevice, thisDeviceIP, other}
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  ShowIPState instance = ShowIPState();
-
   @override
   Widget build(BuildContext context) {
 
@@ -65,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     switch(selectedMenu) {
 
       case Menu.searchDevice:
-        _pushPage(context, instance.build(context));
+        _pushPage(context, const ShowIPState());
         break;
 
       case Menu.thisDeviceIP:
