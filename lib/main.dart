@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'mainWidget.dart';
+import 'package:android_tethering_tx_rx_app/showThisIPAddress.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: const MainPage(title: 'Flutter Demo Home Page'),
+      home: const ShowThisIPAddressPage(title: 'Flutter Demo Home Page'),
     );
 
   }

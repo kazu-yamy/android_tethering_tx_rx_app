@@ -10,22 +10,22 @@ class ShowThisIPAddressPage extends StatefulWidget {
 
 class _ShowThisIPAddressPage extends State<ShowThisIPAddressPage> {
 
-  dynamic externalIP;
-  dynamic internalIP;
-  dynamic networkType;
+  String externalIP = "Searching...";
+  String internalIP = "Searching...";
+  String networkType = "Searching...";
+
+  void _refresh() async {
+    externalIP = await getExternalIP();
+    internalIP = await getInternalIP();
+    networkType = await getNetworkType();
+    setState(() { });
+  }
 
   @override
   void initState() {
     super.initState();
+    _refresh();
   }
-
- void refreshIPAddress() {
-    setState(() {
-      externalIP = getExternalIP;
-      internalIP = getInternalIP;
-      networkType = getNetworkType;
-    });
- }
 
   @override
   Widget build(BuildContext context) {
@@ -39,48 +39,46 @@ class _ShowThisIPAddressPage extends State<ShowThisIPAddressPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('ExternalIP: $externalIP'),
+            Text('ExternalIP:$externalIP'),
             Text('InternalIP: $internalIP'),
             Text('Network: $networkType'),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: refreshIPAddress,
-        tooltip: 'Refresh IP',
-        child: const Text('Refresh'),
+        onPressed: _refresh,
+        child: const Icon(Icons.refresh),
       ),
     );
   }
-
 }
 
 //~~~~~Functions~~~~//
-getExternalIP<String>() async {
+Future<String> getExternalIP() async {
   dynamic externalIP;
   try {
     externalIP = await RGetIp.externalIP;
-  } catch (e) {
+  } catch (err) {
     externalIP = 'Unknown...';
   }
   return externalIP;
 }
 
-getInternalIP<String>() async {
+Future<String> getInternalIP() async {
   dynamic internalIP;
   try {
     internalIP = await RGetIp.internalIP;
-  } catch (e) {
+  } catch (err) {
     internalIP = 'Unknown...';
   }
   return internalIP;
 }
 
-getNetworkType<String>() async {
+Future<String> getNetworkType() async {
   dynamic networkType;
   try {
     networkType = await RGetIp.networkType;
-  } catch (e) {
+  } catch (err) {
     networkType = 'Unknown...';
   }
   return networkType;
